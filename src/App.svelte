@@ -1,11 +1,6 @@
 <script>
-	export let name;
+	import { Route } from "tinro";
 </script>
-
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
 
 <style>
 	main {
@@ -28,3 +23,24 @@
 		}
 	}
 </style>
+
+<nav><a href="/">Home</a> <a href="/import-recipe">Import Recipe</a></nav>
+
+<Route path="/">
+	<h1>It is main page</h1>
+</Route>
+<Route path="/import-recipe">
+	<!-- <Route path="/">
+		<h1>Portfolio introduction</h1>
+		<nav>
+			<a href="/import-recipe/sites">Sites</a>
+			<a href="/import/photos">Photos</a>
+		</nav>
+	</Route>
+	<Route path="/sites">
+		<h1>Portfolio: Sites</h1>
+	</Route>
+	<Route path="/photos">
+		<h1>Portfolio: Photos</h1>
+	</Route> -->
+</Route>
