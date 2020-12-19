@@ -7,11 +7,10 @@
     } from "../../services/recipes/RecipeService";
     import { SkeletonBlock } from "skeleton-elements/svelte";
     import { SkeletonImage } from "skeleton-elements/svelte";
+    import Button from "../Generics/Button.svelte";
 
     // Initial state variables
-
     export let data = [];
-    console.log(data);
     export let recipeDetails = null;
     export let showDetails = false;
     let effect = "wave";
@@ -23,7 +22,7 @@
             .then((response) => {
                 // Data is the API response recipe list
                 data = response.recipes;
-                console.log(data);
+
                 // Recipe Details stores the current pulled recipe list from the database so it can be checked against the new values when a recipe is added.
                 recipeDetails = data;
             })
@@ -42,6 +41,7 @@
     }
 
     const deleteRecipe = (name) => {
+        console.log(name);
         deleteRecipeByName(name)
             .then(() => {
                 data = {
@@ -71,32 +71,49 @@
 <style type="text/scss">
     .card {
         width: 250px;
-        flex-direction: row;
+        height: 22em;
         border: 1px;
         cursor: pointer;
         @media (max-width: 768px) {
-            flex-direction: column;
             width: 200px;
         }
         display: inline-grid;
-
         border-radius: 5px;
-        background: "#E8E5DA";
+        background: #e8e5da;
         margin: 0.5em;
-        color: #000;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         transition: 0.3s;
         &:hover {
             box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
             transform: scale(1.05);
         }
+        z-index: 1;
     }
     img {
         width: inherit;
         border-radius: 5px 5px 0 0;
-        max-height: 10em;
+        height: 10em;
     }
     .recipe-grid {
+        display: inline-grid;
+    }
+
+    p {
+        font-size: 0.8rem;
+        margin-top: 0.3em;
+        margin-bottom: 0.3em;
+        margin-block-end: 0.3em;
+        margin-block-start: 0.3em;
+    }
+
+    h4 {
+        margin-bottom: 0.3em;
+        margin-block-end: 0.3em;
+        margin-block-start: 0.3em;
+    }
+
+    .card-details {
+        padding: 0 1em 1em 1em;
     }
 </style>
 
@@ -108,11 +125,28 @@
                 key={recipe.recipe_name}
                 on:click={viewRecipe(recipe)}>
                 <img alt="example" src={recipe.recipe_image} />
-                <div>
-                    {#if recipe.recipe_name != null}
+                <div class="card-details">
+                    {#if recipe.recipe_name}
                         <h4>{recipe.recipe_name}</h4>
                     {/if}
+                    {#if recipe.category}
+                        <p>{recipe.category}</p>
+                    {/if}
+                    {#if recipe.prep_time && recipe.prep_time[1]}
+                        <p>Prep time: {recipe.prep_time[1]}m</p>
+                    {/if}
+                    {#if recipe.cook_time && recipe.cook_time[1]}
+                        <p>Cook time: {recipe.cook_time[1]}m</p>
+                    {/if}
+                    {#if recipe.yield}
+                        <p>Yield: {recipe.yield}</p>
+                    {/if}
                 </div>
+                <Button
+                    handleClick={() => {
+                        if (window.confirm('Are you sure?')) deleteRecipe(recipe.recipe_name);
+                    }}
+                    text="Delete" />
             </div>
         {:else}
             <SkeletonImage width="50" height="50" {effect} />

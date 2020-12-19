@@ -1,6 +1,3 @@
-import { createRecipe } from "./RecipeService";
-const cheerio = require("cheerio");
-
 // TODO: refactor all of this, add error handling
 export async function importRecipe(url) {
   var importUrl = url;
