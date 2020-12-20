@@ -7,7 +7,7 @@
     } from "../../services/recipes/RecipeService";
     import { SkeletonBlock } from "skeleton-elements/svelte";
     import { SkeletonImage } from "skeleton-elements/svelte";
-    import Button from "../Generics/Button.svelte";
+    import "skeleton-elements/skeleton-elements.css";
 
     // Initial state variables
     export let data = [];
@@ -89,6 +89,7 @@
         }
         z-index: 1;
     }
+
     img {
         width: inherit;
         border-radius: 5px 5px 0 0;
@@ -104,6 +105,7 @@
         margin-bottom: 0.3em;
         margin-block-end: 0.3em;
         margin-block-start: 0.3em;
+        overflow-wrap: break-word;
     }
 
     h4 {
@@ -114,6 +116,20 @@
 
     .card-details {
         padding: 0 1em 1em 1em;
+        max-width: 125px;
+    }
+
+    // Dark Theme
+    :global(body.dark-mode) .card {
+        background-color: #fff;
+    }
+
+    :global(body.dark-mode) h4 {
+        color: #000;
+    }
+
+    :global(body.dark-mode) p {
+        color: #000;
     }
 </style>
 
@@ -142,11 +158,10 @@
                         <p>Yield: {recipe.yield}</p>
                     {/if}
                 </div>
-                <Button
-                    handleClick={() => {
+                <button
+                    on:click={() => {
                         if (window.confirm('Are you sure?')) deleteRecipe(recipe.recipe_name);
-                    }}
-                    text="Delete" />
+                    }}>Delete</button>
             </div>
         {:else}
             <SkeletonImage width="50" height="50" {effect} />

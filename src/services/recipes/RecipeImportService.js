@@ -1,3 +1,5 @@
+const cheerio = require("cheerio");
+
 // TODO: refactor all of this, add error handling
 export async function importRecipe(url) {
   var importUrl = url;
@@ -16,6 +18,7 @@ export async function importRecipe(url) {
   // console.log("hey");
   // Use CORS blocker when running fetch in development
   importUrl = `https://cors-anywhere.herokuapp.com/` + url;
+  console.log(importUrl);
 
   const response = await fetch(importUrl, {
     headers: {

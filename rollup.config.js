@@ -5,7 +5,6 @@ import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
 import css from "rollup-plugin-css-only";
 const preprocess = require("svelte-preprocess");
-const cheerio = require("cheerio");
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -49,7 +48,6 @@ export default {
         dev: !production,
       },
       preprocess: preprocess(),
-      cheerio: cheerio(),
     }),
     // we'll extract any component CSS out into
     // a separate file - better for performance

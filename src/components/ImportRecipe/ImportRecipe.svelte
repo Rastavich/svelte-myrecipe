@@ -1,37 +1,40 @@
 <script>
     import CreateRecipe from "../CreateRecipe/CreateRecipe.svelte";
-    import { importRecipe } from "../../services/recipes/RecipeImportService";
-    import Button from "../Generics/Button.svelte";
+    import { importRecipe } from "../../services/recipes/RecipeService";
 
-    export let recipeData;
+    export let recipeData = null;
+    let url;
 
-    const onRecipeSubmit = (data, e) => {
-        let url = data.url;
-
-        importRecipe(url)
+    function onRecipeSubmit(e) {
+        const importUrl = { url };
+        console.log(importUrl.url);
+        importRecipe(importUrl.url)
             .then((response) => {
                 recipeData = response;
-                console.log(response);
+                console.log(recipeData);
             })
-            .catch((error) => {
-                console.log(error);
+            .catch((e) => {
+                window.alert(
+                    "Import error, please check your URL and try again."
+                );
+                console.log(e.message);
             })
             .finally(() => {});
-    };
+    }
 </script>
 
 <style>
 </style>
 
 <div>
-    <form className="form-group" on:submit|preventDefault={onRecipeSubmit}>
+    <form on:submit|preventDefault={onRecipeSubmit}>
         <input
             className="form-field"
-            name="url"
+            bind:value={url}
             placeholder="Url"
             type="text" />
-        <Button type="submit" text="Import" />
-        <Button text="Manual Import" />
+        <button type="submit">Import</button>
+        <button>Manual Import</button>
     </form>
 </div>
 

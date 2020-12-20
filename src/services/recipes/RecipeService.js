@@ -41,3 +41,8 @@ export async function updateRecipeByName(name) {
   const response = await fetch(`/api/recipes/update?name=` + name);
   return await response.json();
 }
+
+export async function importRecipe(url) {
+  const response = await fetch(`/api/import/importRecipe?url=` + url);
+  return await response.json();
+}
