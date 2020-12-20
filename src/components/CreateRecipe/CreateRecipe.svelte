@@ -2,9 +2,9 @@
     import { createRecipe } from "../../services/recipes/RecipeService";
     export let recipe;
 
-    const onRecipeSubmit = (data, e) => {
-        console.log(data);
-        createRecipe(data)
+    const onRecipeSubmit = (e) => {
+        console.log(recipe);
+        createRecipe(recipe)
             .then((response) => {
                 alert("Recipe Created");
                 e.target.reset();
@@ -20,9 +20,18 @@
 </style>
 
 <form on:submit|preventDefault={onRecipeSubmit}>
-    <input bind:value={recipe.recipe_name} placeholder="Recipe Name" />
-    <input bind:value={recipe.category} placeholder="Category" />
-    <input bind:value={recipe.recipe_intro} placeholder="Recipe Intro" />
+    <input
+        bind:value={recipe.recipe_name}
+        placeholder="Recipe Name"
+        type="textarea" />
+    <input
+        bind:value={recipe.category}
+        placeholder="Category"
+        type="textarea" />
+    <input
+        bind:value={recipe.recipe_intro}
+        placeholder="Recipe Intro"
+        type="textarea" />
     <input
         bind:value={recipe.prep_time}
         placeholder="Preparation Time"
@@ -35,7 +44,7 @@
     <input
         bind:value={recipe.recipe_image}
         placeholder="Recipe Image URL"
-        type="text" />
+        type="textarea" />
     <input
         bind:value={recipe.yield}
         placeholder="Yield (number of servings)"
@@ -47,27 +56,27 @@
     <input
         bind:value={recipe.recipe_url}
         placeholder="URL of recipe (if applicable)"
-        type="text" />
+        type="textarea" />
     {#each recipe.nutrition as nutrition, index}
         <input
             bind:value={recipe.nutrition[index]}
             placeholder="Nutrition"
             defaultValue={nutrition}
-            type="text" />
+            type="textarea" />
     {/each}
     {#each recipe.ingredients as ingredient, index}
         <input
             bind:value={recipe.ingredients[index]}
             placeholder="Ingredients"
             defaultValue={ingredient}
-            type="text" />
+            type="textarea" />
     {/each}
     {#each recipe.steps as step, index}
         <input
             bind:value={recipe.steps[index]}
             placeholder="Steps"
             defaultValue={step}
-            type="text" />
+            type="textarea" />
     {/each}
     <button type="submit">Submit</button>
 </form>

@@ -1,6 +1,7 @@
 <script>
     import CreateRecipe from "../CreateRecipe/CreateRecipe.svelte";
     import { importRecipe } from "../../services/recipes/RecipeService";
+    import Recipes from "../Recipe/Recipes.svelte";
 
     export let recipeData = null;
     let url;
@@ -35,9 +36,10 @@
             type="text" />
         <button type="submit">Import</button>
         <button>Manual Import</button>
+
+        {#if recipeData != null}
+            <CreateRecipe recipe={recipeData} />
+            <!-- <Recipes data={recipeData} /> -->
+        {/if}
     </form>
 </div>
-
-{#if recipeData != null}
-    <CreateRecipe recipe={recipeData} />
-{/if}
