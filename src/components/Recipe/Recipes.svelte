@@ -8,6 +8,7 @@
     import { SkeletonBlock } from "skeleton-elements/svelte";
     import { SkeletonImage } from "skeleton-elements/svelte";
     import "skeleton-elements/skeleton-elements.css";
+    import RecipeDetails from "./RecipeDetails.svelte";
 
     // Initial state variables
     export let data = [];
@@ -169,3 +170,7 @@
         {/each}
     </div>
 </div>
+
+{#if showDetails}
+    <RecipeDetails {recipeDetails} />
+{/if}
