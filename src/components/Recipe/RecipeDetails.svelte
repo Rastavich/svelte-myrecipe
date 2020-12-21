@@ -7,11 +7,7 @@
             "This recipe has no information...edit this recipe to add them";
     }
 
-    const { steps } = recipeDetails;
-
-    const { ingredients } = recipeDetails;
-
-    const { nutrition } = recipeDetails;
+    $: ({ steps, ingredients, nutrition } = recipeDetails);
 </script>
 
 <style type="text/scss">
