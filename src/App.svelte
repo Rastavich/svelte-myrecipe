@@ -52,7 +52,7 @@
 	// Grid for main dashboard nav
 	div {
 		display: grid;
-		grid-template-columns: repeat(2, auto);
+		grid-template-columns: repeat(3, auto);
 		grid-gap: 1rem;
 	}
 </style>

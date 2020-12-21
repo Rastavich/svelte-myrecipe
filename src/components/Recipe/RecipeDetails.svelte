@@ -15,6 +15,10 @@
 </script>
 
 <style type="text/scss">
+    div {
+        display: inline-grid;
+        width: 20em;
+    }
 </style>
 
 {#if recipeDetails}
