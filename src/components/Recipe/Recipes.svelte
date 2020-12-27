@@ -9,6 +9,7 @@
     import { SkeletonImage } from "skeleton-elements/svelte";
     import "skeleton-elements/skeleton-elements.css";
     import RecipeDetails from "./RecipeDetails.svelte";
+    import MdClear from "svelte-icons/md/MdClear.svelte";
 
     // Initial state variables
     export let data = [];
@@ -117,7 +118,17 @@
 
     .card-details {
         padding: 0 1em 1em 1em;
-        max-width: 125px;
+        max-width: 11rem;
+    }
+    icon {
+        height: 2rem;
+        position: absolute;
+        width: 2rem;
+        transition: 0.3s;
+        color: black;
+        &:hover {
+            transform: scale(1.5);
+        }
     }
 
     // Dark Theme
@@ -159,10 +170,12 @@
                         <p>Yield: {recipe.yield}</p>
                     {/if}
                 </div>
-                <button
+                <icon
                     on:click={() => {
                         if (window.confirm('Are you sure?')) deleteRecipe(recipe.recipe_name);
-                    }}>Delete</button>
+                    }}>
+                    <MdClear />
+                </icon>
             </div>
         {:else}
             <SkeletonImage width="50" height="50" {effect} />
