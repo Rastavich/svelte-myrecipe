@@ -1,4 +1,6 @@
 <script>
+    import { fly } from "svelte/transition";
+    import { sineIn } from "svelte/easing";
     export let recipeDetails;
     let errorMsg;
 
@@ -8,28 +10,35 @@
     }
 
     $: ({ steps, ingredients, nutrition } = recipeDetails);
+
+    function hideDetails() {
+        recipeDetails = false;
+    }
 </script>
 
 <style type="text/scss">
     div {
-        display: inline-grid;
-        width: 20em;
+        position: absolute;
+        right: 0;
+        width: 50rem;
+        max-width: 100%;
+        background-color: black;
+        @media (max-width: 400px) {
+            width: 15rem;
+        }
     }
 </style>
 
 {#if recipeDetails}
-    <div>
+    <div transition:fly={{ x: 100, easing: sineIn }}>
+        <button on:click={hideDetails}>Hide</button>
         <h5>{recipeDetails.recipe_intro}</h5>
         {#if ingredients}
             <h4>Ingredients</h4>
             <ul>
                 {#each ingredients as ingredient}
                     <li key={ingredient}>
-                        <div>
-                            <span>
-                                <p>{ingredient}&nbsp;</p>
-                            </span>
-                        </div>
+                        <p>{ingredient}&nbsp;</p>
                     </li>
                 {/each}
             </ul>
