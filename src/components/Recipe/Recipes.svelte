@@ -9,7 +9,7 @@
     import { SkeletonImage } from "skeleton-elements/svelte";
     import "skeleton-elements/skeleton-elements.css";
     import RecipeDetails from "./RecipeDetails.svelte";
-    import MdClear from "svelte-icons/md/MdClear.svelte";
+    import MdDeleteForever from "svelte-icons/md/MdDeleteForever.svelte";
 
     // Initial state variables
     export let data = [];
@@ -73,7 +73,7 @@
 <style type="text/scss">
     .card {
         width: 250px;
-        height: 22em;
+        height: 20em;
         border: 1px;
         cursor: pointer;
         @media (max-width: 768px) {
@@ -126,8 +126,10 @@
         width: 2rem;
         transition: 0.3s;
         color: black;
+        background-color: white;
+        border-radius: 5px;
         &:hover {
-            transform: scale(1.5);
+            transform: scale(1.2);
         }
     }
 
@@ -174,7 +176,7 @@
                     on:click={() => {
                         if (window.confirm('Are you sure?')) deleteRecipe(recipe.recipe_name);
                     }}>
-                    <MdClear />
+                    <MdDeleteForever />
                 </icon>
             </div>
         {:else}

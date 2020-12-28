@@ -22,6 +22,8 @@
             })
             .finally(() => {});
     }
+
+    function manualCreate() {}
 </script>
 
 <style>
@@ -35,7 +37,7 @@
             placeholder="Url"
             type="text" />
         <button type="submit">Import</button>
-        <button>Manual Import</button>
+        <button on:click={manualCreate}>Manual Import</button>
 
         {#if recipeData != null}
             <CreateRecipe recipe={recipeData} />

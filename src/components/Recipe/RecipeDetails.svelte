@@ -21,6 +21,7 @@
         position: absolute;
         right: 0;
         width: 50rem;
+        top: 0;
         max-width: 100%;
         background-color: black;
         @media (max-width: 400px) {
@@ -38,7 +39,7 @@
             <ul>
                 {#each ingredients as ingredient}
                     <li key={ingredient}>
-                        <p>{ingredient}&nbsp;</p>
+                        <p>{ingredient}</p>
                     </li>
                 {/each}
             </ul>
@@ -60,7 +61,6 @@
             </ul>
         {/if}
     </div>
-{:else}
+{:else if errorMsg != null}
     <p>{errorMsg}</p>
 {/if}
-<div />
