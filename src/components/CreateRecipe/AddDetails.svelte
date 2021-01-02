@@ -24,7 +24,7 @@
   function removeSelf(index, type) {
     switch (type) {
       case "steps":
-        steps = [...step.slice(0, index), ...steps.slice(index + 1)];
+        steps = [...steps.slice(0, index), ...steps.slice(index + 1)];
         break;
       case "ingredients":
         ingredients = [
